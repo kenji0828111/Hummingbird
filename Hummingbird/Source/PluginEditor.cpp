@@ -8,6 +8,7 @@
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include <pybind11/embed.h>
 
 //==============================================================================
 HummingbirdAudioProcessorEditor::HummingbirdAudioProcessorEditor (HummingbirdAudioProcessor& p)
@@ -37,4 +38,13 @@ void HummingbirdAudioProcessorEditor::resized()
 {
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
+}
+
+namespace py = pybind11;
+py::scoped_interpreter guard{};
+
+std::string generateAudioWithRiffusion(int bpm, std::string chords, std::string genre) {
+    py::module_ riffusion = py::module_::import("generate_audio");
+    py::object result = riffusion.attr("generate_audio")(bpm, chords, genre);
+    return result.cast<std::string>();
 }
