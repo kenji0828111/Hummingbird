@@ -90,6 +90,33 @@ This VST plugin provides a user interface that allows you to specify BPM, chord 
 
   If no errors occur, the setup is complete.
 
+- **Setting up Pybind11**
+  Use Pybind11 to call Python APIs directly from JUCE's C++ code.
+
+  ```
+  pip install pybind11
+  ```
+
+  構成プロパティ→VC++ディレクトリ→インクルードディレクトリに追加
+  Hummingbird_SharedCode
+  Hummingbird_StandalonePlugin
+  Hummingbird_VST3
+
+  C:\{your project path}\Hummingbird\venv\Include
+
+  構成プロパティ→VC++ディレクトリ→ライブラリディレクトリに追加
+  Hummingbird_SharedCode
+  Hummingbird_StandalonePlugin
+  Hummingbird_VST3
+
+  C:\Users\{your name}\AppData\Local\Programs\Python\Python310\libs
+
+  構成プロパティ→「リンカー」→「入力」の「追加の依存ファイル」
+  Hummingbird_StandalonePlugin
+  Hummingbird_VST3
+
+  C:\Users\{your name}\AppData\Local\Programs\Python\Python310\libs\python310.lib
+
 - **Deactivating and Reactivating the Virtual Environment**\
   To deactivate the virtual environment:
 
@@ -102,4 +129,3 @@ This VST plugin provides a user interface that allows you to specify BPM, chord 
   ```
   venv\Scripts\activate
   ```
-
